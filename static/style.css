@@ -12,5 +12,43 @@ button {
     padding: 10px 20px;
     margin: 10px;
     cursor: pointer;
+    border: none;
+    border-radius: 25px;
     transition: all 0.3s ease;
+}
+
+#yesBtn {
+    background-color: #ff4d6d; /* pink-red */
+    color: white;
+}
+
+#noBtn {
+    background-color: #4d79ff; /* blue */
+    color: white;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.video-container {
+    position: relative;
+    display: inline-block;
+}
+
+.watermark-cover {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    width: 80px;   /* adjustable */
+    height: 50px;  /* adjustable */
+
+    background-color: white;
+}
+
+#languageSelect{
+    position: absolute;
+    top: 30px;
+    right: 30px;
 }

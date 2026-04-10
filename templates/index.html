@@ -6,11 +6,20 @@
 </head>
 <body>
 
-    <h1>Will you be my girlfriend?</h1>
+    <h1 id="title">Will you be my girlfriend?</h1>
 
+    <select id="languageSelect">
+    <option value="en">English</option>
+    <option value="zh">中文</option>
+    </select>
+
+    <div class="video-container">
     <video id="gif" autoplay loop muted playsinline width="300">
-    <source src="{{ url_for('static', filename='imgs/DDIT9217.MOV') }}" type="video/mp4">
+        <source src="{{ url_for('static', filename='imgs/DDIT9217.MOV') }}" type="video/mp4">
     </video>
+
+    <div class="watermark-cover"></div>
+</div>
 
     <div class="buttons">
         <button id="yesBtn">Yes ❤️</button>
