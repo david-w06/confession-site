@@ -1,10 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Will you be my GF?</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
+    <h1>Will you be my girlfriend?</h1>
+
+    <video id="gif" autoplay loop muted playsinline width="300">
+    <source src="{{ url_for('static', filename='imgs/DDIT9217.MOV') }}" type="video/mp4">
+    </video>
+
+    <div class="buttons">
+        <button id="yesBtn">Yes ❤️</button>
+        <button id="noBtn">No 😢</button>
+    </div>
+
+    <p id="message"></p>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
