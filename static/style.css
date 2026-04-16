@@ -48,7 +48,21 @@ button:hover {
 }
 
 #languageSelect{
+    width: 80px;
+    height: 20px;
     position: absolute;
     top: 30px;
     right: 30px;
+}
+
+#modeSelect{
+    width: 80px;
+    height: 20px;
+    position: absolute;
+    top: 60px;
+    right: 30px;
+}
+
+#noBtn {
+    transition: left 0.3s linear, top 0.3s linear;
 }

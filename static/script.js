@@ -3,13 +3,17 @@ const translations = {
         title: "Will you marry me?",
         yes: "Yes ❤️",
         no: "No 😢",
-        yay: "YAYYY ❤️🎉"
+        yay: "YAYYY, LOVE U BABE ❤️🎉",
+        modeNormal: "Normal",
+        modeHard: "Hard "
     },
     zh: {
         title: "你能和我在一起吗？",
         yes: "同意 ❤️",
         no: "不行 😢",
-        yay: "太好了！爱你宝宝！ ❤️🎉"
+        yay: "太好了！爱你宝宝！ ❤️🎉",
+        modeNormal: "普通",
+        modeHard: "困难 "
     }
 };
 
@@ -18,18 +22,57 @@ let noClickCount = 0;
 
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
-const gif = document.getElementById("gif");
+const mainVideo = document.getElementById("gif");
+const videoSad = document.getElementById("videoSad");
+const videoHappy = document.getElementById("videoHappy");
+
 const message = document.getElementById("message");
 const languageSelect = document.getElementById("languageSelect");
 
+// mode changing
+let mode = "normal";
+const modeSelect = document.getElementById("modeSelect");
+
+modeSelect.addEventListener("change", () => {
+    mode = modeSelect.value;
+});
+
+//mouse movement
+document.addEventListener("mousemove", (e) => {
+    if (mode !== "hard") return;
+
+    const mouseX = e.clientX;
+    const mouseY = e.clientY;
+
+    const rect = noBtn.getBoundingClientRect();
+
+    const btnX = rect.left + rect.width / 2;
+    const btnY = rect.top + rect.height / 2;
+
+    const distance = Math.hypot(mouseX - btnX, mouseY - btnY);
+
+    if (distance < 100) {
+        moveButton();
+    }
+});
+
+function moveButton() {
+    noBtn.style.position = "absolute";
+
+    const newX = Math.random() * 80;
+    const newY = Math.random() * 80;
+
+    noBtn.style.left = newX + "%";
+    noBtn.style.top = newY + "%";
+}
 
 noBtn.addEventListener("click", () => {
     noClickCount++;
 
     // Change to sad gif after clicking no 3 times.
     if (noClickCount == 3) {
-        gif.querySelector("source").src = "static/imgs/THAS2986.MOV";
-        gif.load();
+        mainVideo.src = videoSad.querySelector("source").src;
+        mainVideo.play();
     }
 
     // Shrink button
@@ -40,11 +83,7 @@ noBtn.addEventListener("click", () => {
     let yesScale = 1 + (noClickCount * 0.5);
     yesBtn.style.transform = `scale(${yesScale})`;
 
-
-    // Move button randomly
-    noBtn.style.position = "absolute";
-    noBtn.style.left = Math.random() * 80 + "%";
-    noBtn.style.top = Math.random() * 80 + "%";
+    moveButton();
 
     // Remove after 5 clicks
     if (noClickCount >= 5) {
@@ -53,9 +92,9 @@ noBtn.addEventListener("click", () => {
 });
 
 yesBtn.addEventListener("click", () => {
-    gif.querySelector("source").src = "static/imgs/PIFV3484.MOV";
-    gif.load();
-    message.innerText = translations[currentLang].yay;
+    mainVideo.src = videoHappy.querySelector("source").src;
+    mainVideo.play();
+    message.innerText = translations[currentLang].yay; //This part doesn't translate when triggered first
 
     // Hide buttons
     yesBtn.style.display = "none";
@@ -69,12 +108,18 @@ function updateLanguage(lang) {
     document.getElementById("title").innerText = translations[lang].title;
     yesBtn.innerText = translations[lang].yes;
     noBtn.innerText = translations[lang].no;
+    document.getElementById("message").innerText = translations[lang].yay;
+
+    document.getElementById("modeNormal").innerText = translations[lang].modeNormal;
+    document.getElementById("modeHard").innerText = translations[lang].modeHard;
 }
 
 
 languageSelect.addEventListener("change", () => {
     updateLanguage(languageSelect.value);
 });
+
+
 
 /* auto detect browser lang feature
 const userLang = navigator.language.startsWith("zh") ? "zh" : "en";

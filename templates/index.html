@@ -13,10 +13,31 @@
     <option value="zh">中文</option>
     </select>
 
+    <select id="modeSelect">
+    <option id="modeNormal" value="normal">Normal</option>
+    <option id="modeHard" value="hard">Hard 😈</option>
+    </select>
+
     <div class="video-container">
-    <video id="gif" autoplay loop muted playsinline width="300">
-        <source src="{{ url_for('static', filename='imgs/DDIT9217.MOV') }}" type="video/mp4">
+
+    <video id="gif" autoplay loop muted playsinline width="300"
+        src="{{ url_for('static', filename='imgs/Ddit9217.mp4') }}">
     </video>
+
+    <!-- preload videos -->
+    <video id="videoSad" preload="auto" style="display:none">
+        <source src="{{ url_for('static', filename='imgs/Thas2986.mp4') }}" type="video/mp4">
+    </video>
+
+    <video id="videoHappy" preload="auto" style="display:none">
+        <source src="{{ url_for('static', filename='imgs/Pifv3484.mp4') }}" type="video/mp4">
+    </video>
+
+    <div class="watermark-cover"></div>
+
+    </div>
+
+
 
     <div class="watermark-cover"></div>
 </div>
